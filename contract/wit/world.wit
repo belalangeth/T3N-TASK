@@ -1,0 +1,26 @@
+package z:invoice-approval@0.1.0;
+
+world invoice-approval {
+    import host:tenant/tenant-context@1.0.0;
+    import host:interfaces/logging@2.1.0;
+    import host:interfaces/kv-store@2.1.0;
+
+    export contracts;
+}
+
+interface contracts {
+    record generic-input {
+        input: option<list<u8>>,
+        user-profile: option<list<u8>>,
+        context: option<list<u8>>,
+    }
+
+    /// Evaluate an invoice with tenant policy and persistent duplicate tracking.
+    /// Input JSON contains invoice_id, vendor_id, amount, currency, and purchase_order.
+    /// Output JSON contains decision, reasons, and a redacted invoice summary.
+    evaluate-invoice: func(req: generic-input) -> result<list<u8>, string>;
+
+    /// Store a tenant policy. Intended for administrative setup, not agent use.
+    /// Input JSON contains max_auto_approve and allowed_currencies.
+    set-policy: func(req: generic-input) -> result<list<u8>, string>;
+}

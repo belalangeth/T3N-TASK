@@ -1,0 +1,14 @@
+import { T3nClient, setEnvironment, loadWasmComponent, fetchTrustedManifest, eth_get_address, metamask_sign, createEthAuthInput } from '@terminal3/t3n-sdk';
+const key = process.env.T3N_API_KEY;
+if (!key) throw new Error('T3N_API_KEY is missing');
+setEnvironment('testnet');
+const address = eth_get_address(key);
+const client = new T3nClient({ trustAnchor: await fetchTrustedManifest('testnet'), wasmComponent: await loadWasmComponent(), handlers: { EthSign: metamask_sign(address, undefined, key) } });
+await client.handshake();
+const tenantDid = (await client.authenticate(createEthAuthInput(address))).value;
+const contract = `z:${tenantDid.slice(8)}:invoice-approval`;
+const obsolete = 'did:t3n:b3e08158391a16f8eb0ccfefc4325aeeeebd6450';
+await client.removeMemberDelegationGrants([{ grantee: obsolete, contract_id: contract }]);
+const doc = await client.getMemberDelegation();
+if (doc.grants.some((grant) => grant.grantee === obsolete && grant.contract_id === contract)) throw new Error('obsolete grant still present');
+console.log(JSON.stringify({ verified: true, removed: { grantee: obsolete, contract_id: contract }, remainingGrants: doc.grants.length }, null, 2));
