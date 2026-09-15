@@ -102,3 +102,12 @@ The T3N testnet deployment was read back successfully after upgrade:
 * `scripts/agent-auth-check.mjs`: separate agent identity authentication
 * `scripts/verify-agent-grant.mjs`: readback and allow/deny delegation checks
 * `docs/t3n-verification-full.png`: full page visual evidence
+* `docs/dapp-demo-decision.png`: live delegated approval in the dapp
+* `docs/submission.md`: public submission draft
+* `docs/bug-report.md`: SDK and documentation findings
+
+## Submission
+
+Public repository: https://github.com/belalangeth/T3N-TASK
+
+The remaining external step is to copy `docs/submission.md` and the linked evidence into a public Google Doc, then submit that Google Doc URL through Superteam Earn.

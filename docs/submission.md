@@ -12,7 +12,7 @@ A T3N TEE agent that approves routine invoices without exposing tenant approval 
 
 * Rust WASM component built for `wasm32-wasip2`.
 * T3N private KV map stores policy and `seen:<invoice_id>` markers.
-* Contract is registered and active in T3N sandbox as `z:<tenant>:invoice-approval`, version `0.1.2`.
+* Contract is registered and active in the T3N testnet as `z:<tenant>:invoice-approval`, version `0.1.2`.
 * Descriptor is published and read back from T3N.
 * TypeScript agent wrapper validates and allowlists input before dispatch.
 
@@ -65,8 +65,10 @@ Set `T3N_API_KEY` in the environment. Do not commit any environment file.
 
 ## External publication checklist
 
-* [ ] Create or select the final public GitHub repository.
+* [x] Create or select the final public GitHub repository: https://github.com/belalangeth/T3N-TASK
 * [ ] Add a public Google Doc with the README content and demo evidence.
-* [ ] Capture screenshots of the repo, descriptor, and live demo output.
-* [ ] Decide whether to report SDK descriptor schema discoveries as a T3N developer experience note.
-* [ ] Obtain approval before pushing or submitting to Superteam.
+* [x] Capture screenshots of the descriptor and live demo output.
+* [x] Include SDK descriptor schema discoveries in `docs/bug-report.md`.
+* [ ] Submit the Google Doc URL through Superteam Earn.
+
+The repository is public and the local working tree is clean. Google Doc creation remains pending because this session has no Google OAuth credentials.
